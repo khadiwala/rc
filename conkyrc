@@ -1,0 +1,111 @@
+##############################################
+# Settings
+##############################################
+background yes
+use_xft yes
+xftfont Liberation Sans:size=9
+xftalpha 1
+update_interval 1.0
+total_run_times 0
+own_window yes
+own_window_transparent yes
+##############################################
+# Compositing tips:
+# Conky can play strangely when used with
+# different compositors. I have found the
+# following to work well, but your mileage
+# may vary. Comment/uncomment to suit.
+##############################################
+## no compositor
+own_window_type override
+own_window_argb_visual no
+
+## xcompmgr
+#own_window_type override
+#own_window_argb_visual yes
+
+## cairo-compmgr
+#own_window_type desktop
+#own_window_argb_visual yes
+##############################################
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+minimum_size 200 200
+maximum_width 240
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+default_color FFFFFF
+default_shade_color 000000
+default_outline_color 828282
+alignment top_right
+gap_x 12
+gap_y 56
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+override_utf8_locale no
+
+TEXT
+${color white}
+#${font sans-serif:bold:size=8}SYSTEM ${hr 2}
+#${font sans-serif:normal:size=8}$sysname $kernel $alignr $machine
+#Host:$alignr$nodename
+#Uptime:$alignr$uptime
+#Date: $alignr${exec date --iso-8601} ${exec date +%H:%M}
+
+${font sans-serif:bold:size=8}PROCESSORS ${hr 2}
+#${font sans-serif:normal:size=8}${cpugraph cpu1}
+CPU1: ${cpu cpu1}% ${cpubar cpu1}
+CPU2: ${cpu cpu2}% ${cpubar cpu2}
+CPU3: ${cpu cpu3}% ${cpubar cpu3}
+CPU4: ${cpu cpu4}% ${cpubar cpu4}
+
+${font sans-serif:bold:size=8}MEMORY ${hr 2}
+${font sans-serif:normal:size=8}RAM $alignc $mem / $memmax $alignr $memperc%
+$membar
+
+#${font sans-serif:bold:size=8}GPU ${hr 2}
+#${font sans-serif:normal:size=8}gpu: $alignr${execi 60 nvidia-settings -q gpus -t | grep 'GeForce' | cut -d "(" -f2 | cut -d ")" -f1} 
+#temp: $alignr${execi 60 nvidia-settings -q [gpu:0]/GPUCoreTemp | grep \): | sed 's/^.\+)://' | sed 's/\.//'}°C 
+
+${font sans-serif:bold:size=8}PARTITIONS ${hr 2}
+${font sans-serif:normal:size=8}/ $alignc ${fs_used /} / ${fs_size /} $alignr ${fs_used_perc /}%
+${fs_bar /}
+/home $alignc ${fs_used /home} / ${fs_size /home} $alignr ${fs_used_perc /home}%
+${fs_bar /home}
+/win $alignc ${fs_used /media/windows} / ${fs_size /media/windows} $alignr ${fs_used_perc /media/windows}%
+${fs_bar /media/windows}
+#/data $alignc ${fs_used /media/Elements} / ${fs_size /media/Elements} $alignr ${fs_used_perc /media/Elements}%
+#${fs_bar /media/Elements}
+
+
+${font sans-serif:bold:size=8}NETWORK ${hr 2}
+#${font sans-serif:normal:size=8}ping: $alignr${exec ping -c 1 www.google.de | grep time= | awk '{print $8}' | cut -d "=" -f2}ms
+down:${downspeed wlan0} $alignr up:${upspeed wlan0}
+${downspeedgraph wlan0 30,95 ff0000 0000ff} $alignr${upspeedgraph wlan0 30,95 0000ff ff0000}
+
+${font sans-serif:bold:size=8}PROCESSES [${font sans-serif:normal:size=8}CPU%${font sans-serif:bold:size=8}]${hr 2}
+${font sans-serif:normal:size=6}${top name 1} $alignr${top cpu 1}
+${top name 2} $alignr${top cpu 2}
+${top name 3} $alignr${top cpu 3}
+${top name 4} $alignr${top cpu 4}
+#${top name 5} $alignr${top cpu 5}
+#${top name 6} $alignr${top cpu 6}
+
+${font sans-serif:bold:size=8}PROCESSES [${font sans-serif:normal:size=8}MEM%${font sans-serif:bold:size=8}]${hr 2}
+${font sans-serif:normal:size=6}${top_mem name 1} $alignr${top_mem mem 1}
+${top_mem name 2} $alignr${top_mem mem 2}
+${top_mem name 3} $alignr${top_mem mem 3}
+${top_mem name 4} $alignr${top_mem mem 4}
+
+${font sans-serif:bold:size=8} TV ${hr 2}
+${font sans-serif:normal:size=8}
+${execi 30 /home/ravi/scripts/rss.sh}
+
+${font sans-serif:bold:size=8} Weather ${hr 2}
+${font sans-serif:normal:size=8}
+${execi 300 /home/ravi/scripts/weather.sh 61801}
+${voffset 900}
+
