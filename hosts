@@ -1,0 +1,11 @@
+#
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>	<hostname.domain.org>	<hostname>
+127.0.0.1	cyberdyne		localhost
+::1		cyberdyne		localhost
+192.168.1.251   oscorp			oscorp
+192.168.1.252   tyrell			tyrell
+
+# End of file
