@@ -77,7 +77,7 @@ main = do
             , ppTitle = xmobarColor "green" "" . shorten 50
             , ppSort = getSortByXineramaRule
             }
-        --, modMask    = mod4Mask
+        , modMask    = mod4Mask
         , terminal   = "sakura" 
         , workspaces = myWorkspaces
         , startupHook = setWMName "LG3D"
