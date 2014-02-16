@@ -22,7 +22,7 @@ xset -b
 xsetroot -cursor_name left_ptr
 
 #trayer
-trayer.sh
+#trayer.sh
 
 #bg
 fehbg
